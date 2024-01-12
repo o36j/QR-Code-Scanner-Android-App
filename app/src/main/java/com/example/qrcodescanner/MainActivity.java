@@ -6,11 +6,13 @@ import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
 import android.os.Bundle;
 import android.widget.Button;
@@ -20,17 +22,35 @@ import com.journeyapps.barcodescanner.ScanOptions;
 
 public class MainActivity extends AppCompatActivity {
     Button button;
+    private Button btnCreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         // Initialize UI components
         button = findViewById(R.id.button);
 
         // Set click listener for the button to initiate QR code scanning
         button.setOnClickListener(v -> scanCode());
+
+        button = findViewById(R.id.btnCreate);
+        btnCreate = (Button) findViewById(R.id.btnCreate);
+        btnCreate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openMainActivity2();
+            }
+        });
+
+
+    }
+
+    public void openMainActivity2(){
+        Intent intent = new Intent(this, MainActivity2.class);
+        startActivity(intent);
     }
 
     // Method to initiate QR code scanning
